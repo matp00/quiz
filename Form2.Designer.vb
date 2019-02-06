@@ -104,7 +104,7 @@ Partial Class Form2
         Me.Controls.Add(Me.Button1)
         Me.Name = "Form2"
         Me.RightToLeftLayout = True
-        Me.Text = "Form2"
+        Me.Text = "quiz"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

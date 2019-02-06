@@ -49,11 +49,4 @@
         licznik += 1
     End Sub
 
-    Sub showProgress()
-        increment = increment + 25
-        If increment > ProgressBar1.Maximum Then
-            increment = ProgressBar1.Maximum
-        End If
-        ProgressBar1.Value = increment
-    End Sub
 End Class
