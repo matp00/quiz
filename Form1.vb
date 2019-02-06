@@ -2,9 +2,13 @@
     Dim licznik As Integer = 0
     Dim photos As ListBox.ObjectCollection = Form2.filesListBox.Items
     Public results As New Dictionary(Of String, Boolean)
+    Dim increment As Integer = 0
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ProgressBar1.Minimum = 0
+        ProgressBar1.Maximum = 100
+        ProgressBar1.Step = 25
         nextPicture()
 
     End Sub
@@ -19,8 +23,7 @@
             results.Add(filePath, False)
         End If
         nextPicture()
-
-
+        showProgress()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -31,7 +34,7 @@
             results.Add(filePath, False)
         End If
         nextPicture()
-
+        showProgress()
     End Sub
 
     Private Sub nextPicture()
@@ -45,6 +48,11 @@
         licznik += 1
     End Sub
 
-
-
+    Sub showProgress()
+        increment = increment + 25
+        If increment > ProgressBar1.Maximum Then
+            increment = ProgressBar1.Maximum
+        End If
+        ProgressBar1.Value = increment
+    End Sub
 End Class
