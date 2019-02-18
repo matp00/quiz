@@ -1,6 +1,5 @@
 ﻿Public Class Form2
 
-
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         FolderBrowserDialog1.SelectedPath = My.Computer.FileSystem.CurrentDirectory
         SetEnabled()
