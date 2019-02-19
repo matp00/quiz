@@ -9,58 +9,79 @@
     Dim listOfRepeats As New List(Of Integer)
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        rand10Pictures()
         ProgressBar1.Minimum = 0
         ProgressBar1.Maximum = amountOfPicturesToDisplay
         ProgressBar1.Step = amountOfPicturesToDisplay / amountOfPicturesToDisplay
+        ProgressBar1.PerformStep()
         nextPicture()
+
+
 
     End Sub
 
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim filePath = photos.Item(licznik - 1).ToString
+        Timer1.Stop()
+        Dim filePath = listOfPicturesToDisplay.Item(licznik - 1).ToString
         If filePath.Contains("ng") Then
             results.Add(filePath, True)
         Else
             results.Add(filePath, False)
         End If
         nextPicture()
-        ProgressBar1.PerformStep()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Dim filePath = photos.Item(licznik - 1).ToString
+        Timer1.Stop()
+        Dim filePath = listOfPicturesToDisplay.Item(licznik - 1).ToString
         If filePath.Contains("valid") Then
             results.Add(filePath, True)
         Else
             results.Add(filePath, False)
         End If
         nextPicture()
-        ProgressBar1.PerformStep()
-
     End Sub
 
     Private Sub nextPicture()
+        ProgressBar1.PerformStep()
         If licznik = amountOfPicturesToDisplay Then
+            Timer1.Enabled = False
             Me.Hide()
             Form3.Show()
-            licznik = 0
+        Else
+            PictureBox1.Image = Image.FromFile(listOfPicturesToDisplay.Item(licznik).ToString)
+            licznik += 1
+            resetTimer()
         End If
-
-        PictureBox1.Image = Image.FromFile(photos.Item(licznik).ToString)
-        licznik += 1
     End Sub
 
     Private Sub rand10Pictures()
         Do While listOfPicturesToDisplay.Count < amountOfPicturesToDisplay
             Dim intResult As Integer
             Randomize()
-            intResult = Int((amountOfPicturesInFolder * Rnd()) + 1)
+            intResult = Int((amountOfPicturesInFolder * Rnd()))
             If Not (listOfRepeats.Contains(intResult)) Then
                 listOfPicturesToDisplay.Add(photos.Item(intResult))
+                listOfRepeats.Add(intResult)
             End If
         Loop
+    End Sub
+
+    Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
+        clock.Text = Val(clock.Text) - 1
+        If clock.Text = "0" Then
+            Timer1.Stop()
+            clock.Text = "10"
+            results.Add(listOfPicturesToDisplay.Item(licznik - 1).ToString, False)
+            nextPicture()
+        End If
+    End Sub
+
+    Private Sub resetTimer()
+        Timer1.Start()
+        clock.Text = "10"
     End Sub
 
 End Class

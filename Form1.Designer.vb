@@ -84,15 +84,19 @@ Partial Class Form1
         Me.ProgressBar1.Size = New System.Drawing.Size(362, 10)
         Me.ProgressBar1.TabIndex = 4
         '
+        'Timer1
+        '
+        Me.Timer1.Interval = 1000
+        '
         'clock
         '
         Me.clock.AutoSize = True
-        Me.clock.Location = New System.Drawing.Point(196, 9)
+        Me.clock.Location = New System.Drawing.Point(219, 9)
         Me.clock.Name = "clock"
         Me.clock.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.clock.Size = New System.Drawing.Size(33, 13)
+        Me.clock.Size = New System.Drawing.Size(19, 13)
         Me.clock.TabIndex = 5
-        Me.clock.Text = "zegar"
+        Me.clock.Text = "10"
         '
         'Form1
         '
